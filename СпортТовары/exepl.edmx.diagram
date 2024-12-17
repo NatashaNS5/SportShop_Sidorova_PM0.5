@@ -7,9 +7,9 @@
       <Diagram DiagramId="de342fdb2f45445eb790fd3e448d5fe8" Name="Diagram1">
         <EntityTypeShape EntityType="Спортивные_товарыModel.Order1" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Спортивные_товарыModel.PickupPoint" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Спортивные_товарыModel.Product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Спортивные_товарыModel.Product" Width="2.625" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Спортивные_товарыModel.Role" Width="1.5" PointX="1.125" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Спортивные_товарыModel.sysdiagrams" Width="1.5" PointX="7.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Спортивные_товарыModel.sysdiagrams" Width="1.5" PointX="9.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Спортивные_товарыModel.User" Width="1.5" PointX="3.5" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="Спортивные_товарыModel.FK_Order1_Pickup_Point" ManuallyRouted="false" />
         <AssociationConnector Association="Спортивные_товарыModel.FK__User__UserRole__398D8EEE" ManuallyRouted="false" />

@@ -24,7 +24,7 @@ namespace СпортТовары
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string ProductCategory { get; set; }
-        public byte[] ProductPhoto { get; set; }
+        public string ProductPhoto { get; set; }
         public string ProductManufacturer { get; set; }
         public decimal ProductCost { get; set; }
         public Nullable<byte> ProductDiscountAmount { get; set; }

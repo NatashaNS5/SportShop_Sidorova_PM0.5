@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace СпортТовары
 {
-    /// <summary>
-    /// Логика взаимодействия для Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
         private int failedAttempts = 0; 
@@ -102,18 +99,20 @@ namespace СпортТовары
 
                                 MessageBox.Show($"Добро пожаловать, {surname} {name} {patronymic}!");
 
+                                string fullName = $"{surname} {name} {patronymic}"; 
+
                                 switch (role)
                                 {
                                     case 1:
-                                        var adminWindow = new AdminWindow();
+                                        var adminWindow = new AdminWindow(fullName);
                                         adminWindow.Show();
                                         break;
-                                    case 2:
-                                        var managerWindow = new ManagerWindow();
+                                    case 2: 
+                                        var managerWindow = new ManagerWindow(fullName);
                                         managerWindow.Show();
                                         break;
-                                    case 3:
-                                        var clientWindow = new ClientWindow();
+                                    case 3: 
+                                        var clientWindow = new ClientWindow(fullName);
                                         clientWindow.Show();
                                         break;
                                 }
@@ -165,7 +164,7 @@ namespace СпортТовары
             {
                 context.DrawRectangle(Brushes.White, null, new Rect(0, 0, CaptchaCanvas.Width, CaptchaCanvas.Height));
 
-                var font = new Typeface("Arial");
+                var font = new Typeface("Comic Sans MS");
                 for (int i = 0; i < generatedCaptcha.Length; i++)
                 {
                     double xOffset = i * 20 + random.Next(-5, 5);

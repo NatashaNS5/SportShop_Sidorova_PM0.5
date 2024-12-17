@@ -73,6 +73,10 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cart.xaml.cs">
+      <DependentUpon>Cart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Product.cs" />
     <Compile Include="ClientWindow.xaml.cs">
       <DependentUpon>ClientWindow.xaml</DependentUpon>
     </Compile>
@@ -113,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +208,17 @@
       <DependentUpon>exepl.edmx</DependentUpon>
       <LastGenOutput>exepl.cs</LastGenOutput>
     </Content>
+    <Resource Include="images\picture.png" />
+    <Resource Include="images\B538G6.jpg" />
+    <Resource Include="images\D648N7.jpg" />
+    <Resource Include="images\D830R5.jpg" />
+    <Resource Include="images\E324U7.jpg" />
+    <Resource Include="images\F735B6.jpg" />
+    <Resource Include="images\F746E6.jpg" />
+    <Resource Include="images\F937G4.jpg" />
+    <Resource Include="images\G403T5.jpg" />
+    <Resource Include="images\G598Y6.jpg" />
+    <Resource Include="images\А112Т4.jpg" />
     <Resource Include="F937G4.jpg" />
     <Resource Include="G403T5.jpg" />
     <Resource Include="А112Т4.jpg" />

@@ -51,6 +51,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            <TextBlock x:Name="UserFullNameText" FontSize="16" FontWeight="Bold" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="500,10,20,0" Text="ФИО пользователя" />
         </StackPanel>
 
         <DataGrid x:Name="DGproduct" AutoGenerateColumns="False" IsReadOnly="True" Margin="10" Grid.Row="3" RowHeight="150" ColumnWidth="*">
@@ -58,7 +59,7 @@
                 <DataGridTemplateColumn Header="Фото" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ProductImage}" Width="100" Height="100" Stretch="UniformToFill" />
+                            <Image Source="{Binding ProductPhoto}" Width="100" Height="100" Stretch="Uniform" Margin="5" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -155,5 +156,59 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <StackPanel Orientation="Horizontal" Margin="10,5,10,0" Grid.Row="2">
+            <ComboBox x:Name="SupplierComboBox" Width="300" Height="30" Margin="0,0,10,0" FontSize="14" FontFamily="Comic Sans MS">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="14" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Применить фильтр" Width="150" Height="30" Click="FilterBySupplierButton_Click" Background="#FF498C51" Foreground="Black" FontFamily="Comic Sans MS">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Сортировать по возрастанию" Width="200" Height="30" Margin="5,0,5,0" Click="SortByPriceAscending_Click" Background="#FF498C51" Foreground="Black" FontFamily="Comic Sans MS">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Сортировать по убыванию" Width="200" Height="30" Margin="5,0,0,0" Click="SortByPriceDescending_Click" Background="#FF498C51" Foreground="Black" FontFamily="Comic Sans MS">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

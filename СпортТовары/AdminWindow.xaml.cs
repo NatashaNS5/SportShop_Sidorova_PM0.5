@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,25 +16,48 @@ using System.Windows.Shapes;
 
 namespace СпортТовары
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
-        private Спортивные_товарыEntities _context;
+        private readonly Спортивные_товарыEntities _context;
+        private readonly string _userFullName;
+        private ObservableCollection<Product> _products;
 
-        public AdminWindow()
+        public AdminWindow(string userFullName)
         {
             InitializeComponent();
+
             _context = new Спортивные_товарыEntities();
+            _userFullName = userFullName;
+            UserFullNameText.Text = _userFullName;
             LoadProducts();
         }
 
         private void LoadProducts()
         {
-            var allProducts = _context.Product.ToList();
-            DGproduct.ItemsSource = allProducts;
-            UpdateRecordCount(allProducts.Count, _context.Product.Count());
+            try
+            {
+                var allProducts = _context.Product.ToList();
+                foreach (var product in allProducts)
+                {
+                    var ProductPhoto = product.ProductPhoto; 
+                }
+
+                DGproduct.ItemsSource = allProducts;
+
+                var suppliers = allProducts
+                    .Select(p => p.ProductManufacturer)
+                    .Distinct()
+                    .OrderBy(s => s)
+                    .ToList();
+                suppliers.Insert(0, "Все производители"); 
+                SupplierComboBox.ItemsSource = suppliers;
+
+                UpdateRecordCount(allProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -161,6 +185,65 @@ namespace СпортТовары
             Login login = new Login();
             login.Show();
             this.Close();
+        }
+
+        private void FilterBySupplierButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SupplierComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите производителя из списка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            string selectedSupplier = SupplierComboBox.SelectedItem.ToString();
+
+            if (selectedSupplier == "Все производители")
+            {
+                LoadProducts();
+                return;
+            }
+
+            try
+            {
+                var filteredProducts = _context.Product
+                    .Where(p => p.ProductManufacturer == selectedSupplier)
+                    .ToList();
+
+                DGproduct.ItemsSource = filteredProducts;
+                UpdateRecordCount(filteredProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при фильтрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SortByPriceAscending_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var sortedProducts = _context.Product.OrderBy(p => p.ProductCost).ToList();
+                DGproduct.ItemsSource = sortedProducts;
+                UpdateRecordCount(sortedProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сортировке: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SortByPriceDescending_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var sortedProducts = _context.Product.OrderByDescending(p => p.ProductCost).ToList();
+                DGproduct.ItemsSource = sortedProducts;
+                UpdateRecordCount(sortedProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сортировке: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

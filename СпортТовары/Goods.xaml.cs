@@ -10,6 +10,7 @@ namespace СпортТовары
     public partial class Goods : Window
     {
         private readonly Спортивные_товарыEntities _context;
+        private List<Product> _cartItems = new List<Product>();
 
         public Goods()
         {
@@ -32,7 +33,23 @@ namespace СпортТовары
             try
             {
                 var allProducts = _context.Product.ToList();
+
+                foreach (var product in allProducts)
+                {
+                    var ProductPhoto = product.ProductPhoto; 
+                }
+
                 DGproduct.ItemsSource = allProducts;
+
+                var suppliers = _context.Product
+                    .Select(p => p.ProductManufacturer)
+                    .Distinct()
+                    .OrderBy(s => s)
+                    .ToList();
+
+                suppliers.Insert(0, "Все производители");
+                SupplierComboBox.ItemsSource = suppliers;
+
                 UpdateRecordCount(allProducts.Count, allProducts.Count);
             }
             catch (Exception ex)
@@ -107,6 +124,36 @@ namespace СпортТовары
             }
         }
 
+        private void FilterBySupplierButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SupplierComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите производителя из списка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            string selectedSupplier = SupplierComboBox.SelectedItem.ToString();
+
+            if (selectedSupplier == "Все производители")
+            {
+                LoadProducts();
+                return;
+            }
+
+            try
+            {
+                var filteredProducts = _context.Product
+                    .Where(p => p.ProductManufacturer == selectedSupplier)
+                    .ToList();
+
+                DGproduct.ItemsSource = filteredProducts;
+                UpdateRecordCount(filteredProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при фильтрации: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void ButtonOrder_Click(object sender, RoutedEventArgs e)
         {
             var selectedProduct = DGproduct.SelectedItem as Product;
@@ -116,24 +163,8 @@ namespace СпортТовары
                 return;
             }
 
-            try
-            {
-                var editWindow = new Order(selectedProduct);
-                if (editWindow.ShowDialog() == true)
-                {
-                    _context.SaveChanges();
-                    LoadProducts();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при открытии окна заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void CurrentTabWarning_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Вы уже находитесь в этой вкладке.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            _cartItems.Add(selectedProduct);
+            MessageBox.Show($"Товар \"{selectedProduct.ProductName}\" добавлен в корзину.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void NavigateToLogin_Click(object sender, RoutedEventArgs e)
@@ -142,5 +173,44 @@ namespace СпортТовары
             login.Show();
             Close();
         }
+
+        private void CurrentTabWarning_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Вы уже находитесь в этой вкладке.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void SortByPriceAscending_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var sortedProducts = _context.Product.OrderBy(p => p.ProductCost).ToList();
+                DGproduct.ItemsSource = sortedProducts;
+                UpdateRecordCount(sortedProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сортировке: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SortByPriceDescending_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var sortedProducts = _context.Product.OrderByDescending(p => p.ProductCost).ToList();
+                DGproduct.ItemsSource = sortedProducts;
+                UpdateRecordCount(sortedProducts.Count, _context.Product.Count());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сортировке: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OpenCart_Click(object sender, RoutedEventArgs e)
+        {
+            var cartWindow = new Cart(_cartItems);
+            cartWindow.ShowDialog();
+        }
     }
 }
+

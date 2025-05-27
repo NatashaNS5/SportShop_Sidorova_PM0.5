@@ -17,14 +17,11 @@ using System.Windows.Shapes;
 
 namespace СпортТовары
 {
-    /// <summary>
-    /// Логика взаимодействия для Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
-        private int failedAttempts = 0; 
-        private string generatedCaptcha; 
-        private bool isBlocked = false; 
+        private int failedAttempts = 0;
+        private string generatedCaptcha;
+        private bool isBlocked = false;
 
         public Login()
         {
@@ -79,7 +76,7 @@ namespace СпортТовары
 
             try
             {
-                string connectionString = "Data Source=DESKTOP-J39F6S7;Initial Catalog=Спортивные_товары;Integrated Security=True";
+                string connectionString = "Data Source=DESKTOP-KEHORP4;Initial Catalog=Спортивные_товары;Integrated Security=True";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -93,7 +90,7 @@ namespace СпортТовары
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read()) 
+                            if (reader.Read())
                             {
                                 int role = reader.GetInt32(0);
                                 string surname = reader.GetString(1);
@@ -102,18 +99,20 @@ namespace СпортТовары
 
                                 MessageBox.Show($"Добро пожаловать, {surname} {name} {patronymic}!");
 
+                                string fullName = $"{surname} {name} {patronymic}";
+
                                 switch (role)
                                 {
                                     case 1:
-                                        var adminWindow = new AdminWindow();
+                                        var adminWindow = new AdminWindow(fullName);
                                         adminWindow.Show();
                                         break;
                                     case 2:
-                                        var managerWindow = new ManagerWindow();
+                                        var managerWindow = new ManagerWindow(fullName);
                                         managerWindow.Show();
                                         break;
                                     case 3:
-                                        var clientWindow = new ClientWindow();
+                                        var clientWindow = new ClientWindow(fullName);
                                         clientWindow.Show();
                                         break;
                                 }
@@ -165,7 +164,7 @@ namespace СпортТовары
             {
                 context.DrawRectangle(Brushes.White, null, new Rect(0, 0, CaptchaCanvas.Width, CaptchaCanvas.Height));
 
-                var font = new Typeface("Arial");
+                var font = new Typeface("Comic Sans MS");
                 for (int i = 0; i < generatedCaptcha.Length; i++)
                 {
                     double xOffset = i * 20 + random.Next(-5, 5);

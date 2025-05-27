@@ -24,14 +24,13 @@ namespace СпортТовары
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string ProductCategory { get; set; }
-        public byte[] ProductPhoto { get; set; }
+        public string ProductPhoto { get; set; }
         public string ProductManufacturer { get; set; }
         public decimal ProductCost { get; set; }
         public Nullable<byte> ProductDiscountAmount { get; set; }
         public int ProductQuantityInStock { get; set; }
         public string ProductStatus { get; set; }
         public string ProductSupplier { get; set; }
-        public Nullable<byte> ProductMaxDiscount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order1> Order1 { get; set; }

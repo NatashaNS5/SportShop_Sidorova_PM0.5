@@ -20,7 +20,7 @@ namespace СпортТовары
         public string UserPatronymic { get; set; }
         public string UserLogin { get; set; }
         public string UserPassword { get; set; }
-        public int UserRole { get; set; }
+        public Nullable<int> UserRole { get; set; }
     
         public virtual Role Role { get; set; }
     }

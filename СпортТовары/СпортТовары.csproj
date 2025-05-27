@@ -73,13 +73,27 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Card.xaml.cs">
+      <DependentUpon>Card.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Product.cs" />
     <Compile Include="ClientWindow.xaml.cs">
       <DependentUpon>ClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="exepl.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>exepl.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="exepl.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>exepl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="exepl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>exepl.edmx</DependentUpon>
     </Compile>
     <Compile Include="Goods.xaml.cs">
       <DependentUpon>Goods.xaml</DependentUpon>
@@ -116,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,16 +149,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="exepl.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>exepl.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="exepl.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>exepl.edmx</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -190,16 +198,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="exepl.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>exepl.Context.cs</LastGenOutput>
-      <DependentUpon>exepl.edmx</DependentUpon>
-    </Content>
-    <Content Include="exepl.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>exepl.edmx</DependentUpon>
-      <LastGenOutput>exepl.cs</LastGenOutput>
-    </Content>
     <Resource Include="F937G4.jpg" />
     <Resource Include="G403T5.jpg" />
     <Resource Include="А112Т4.jpg" />
@@ -208,6 +206,29 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="exepl.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>exepl.edmx</DependentUpon>
+      <LastGenOutput>exepl.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="exepl.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>exepl.edmx</DependentUpon>
+      <LastGenOutput>exepl.cs</LastGenOutput>
+    </Content>
+    <Resource Include="images\picture.png" />
+    <Resource Include="images\B538G6.jpg" />
+    <Resource Include="images\D648N7.jpg" />
+    <Resource Include="images\D830R5.jpg" />
+    <Resource Include="images\E324U7.jpg" />
+    <Resource Include="images\F735B6.jpg" />
+    <Resource Include="images\F746E6.jpg" />
+    <Resource Include="images\F937G4.jpg" />
+    <Resource Include="images\G403T5.jpg" />
+    <Resource Include="images\G598Y6.jpg" />
+    <Resource Include="images\А112Т4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

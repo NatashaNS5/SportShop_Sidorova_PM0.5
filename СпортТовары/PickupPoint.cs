@@ -20,11 +20,9 @@ namespace СпортТовары
             this.Order1 = new HashSet<Order1>();
         }
     
-        public int OrderPickupPoint { get; set; }
+        public int IDPick_upPoint { get; set; }
         public int Index { get; set; }
-        public string Town__ { get; set; }
-        public string Street { get; set; }
-        public Nullable<int> Home { get; set; }
+        public string Address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order1> Order1 { get; set; }

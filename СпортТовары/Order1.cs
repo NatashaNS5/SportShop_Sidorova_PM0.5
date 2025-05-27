@@ -22,9 +22,9 @@ namespace СпортТовары
     
         public int OrderID { get; set; }
         public string OrderStatus { get; set; }
-        public System.DateTime OrderDate { get; set; }
-        public System.DateTime OrderDeliveryDate { get; set; }
-        public int OrderPickupPoint { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<System.DateTime> OrderDeliveryDate { get; set; }
+        public Nullable<int> OrderPickupPoint { get; set; }
     
         public virtual PickupPoint PickupPoint { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
